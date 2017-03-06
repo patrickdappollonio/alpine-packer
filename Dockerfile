@@ -8,14 +8,13 @@ ENV PACKER_VERSION=0.12.2 \
     PACKER_DEST=/usr/local/sbin
 
 # Packer path setup
-ENV PACKER_ZIPFILE=packer_${PACKER_VERSION}_${PACKER_OSNAME}_${PACKER_OSARCH}.zip \
-    PACKER_URL=https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_${PACKER_OSNAME}_${PACKER_OSARCH}.zip
+ENV PACKER_ZIPFILE=packer_${PACKER_VERSION}_${PACKER_OSNAME}_${PACKER_OSARCH}.zip
 
 # Install bash
 RUN apk add --no-cache bash
 
 # Install packer in path
-ADD ${PACKER_URL} ${PACKER_DEST}/
+ADD https://releases.hashicorp.com/packer/${PACKER_VERSION}/${PACKER_ZIPFILE} ${PACKER_DEST}/
 RUN unzip ${PACKER_DEST}/${PACKER_ZIPFILE} -d ${PACKER_DEST} && \
     rm -rf ${PACKER_DEST}/${PACKER_ZIPFILE}
 
