@@ -16,8 +16,8 @@ RUN apk add --no-cache bash
 
 # Install packer in path
 ADD ${PACKER_URL} ${PACKER_DEST}/
-RUN unzip ${PACKER_DEST}/${PACKER_ZIPFILE} -d ${PACKER_DEST}
-RUN rm -rf ${PACKER_DEST}/${PACKER_ZIPFILE}
+RUN unzip ${PACKER_DEST}/${PACKER_ZIPFILE} -d ${PACKER_DEST} && \
+    rm -rf ${PACKER_DEST}/${PACKER_ZIPFILE}
 
 # Test packer and omit the exit code
 RUN packer version
