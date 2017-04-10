@@ -10,9 +10,6 @@ ENV PACKER_VERSION=0.12.2 \
 # Packer path setup
 ENV PACKER_ZIPFILE=packer_${PACKER_VERSION}_${PACKER_OSNAME}_${PACKER_OSARCH}.zip
 
-# Install bash
-RUN apk add --no-cache bash
-
 # Install packer in path
 ADD https://releases.hashicorp.com/packer/${PACKER_VERSION}/${PACKER_ZIPFILE} ${PACKER_DEST}/
 RUN unzip ${PACKER_DEST}/${PACKER_ZIPFILE} -d ${PACKER_DEST} && \
