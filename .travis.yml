@@ -3,12 +3,16 @@ sudo: required
 services:
     - docker
 
+env:
+    global:
+        - IMAGE_TAG=patrickdappollonio/alpine-packer
+
 script:
-    - docker build --pull=true --rm=true -t patrickdappollonio/alpine-packer .
-    - docker run -it patrickdappollonio/alpine-packer /bin/ash -c "packer version"
+    - docker build --pull=true --rm=true -t $IMAGE_TAG .
+    - docker run -it $IMAGE_TAG /bin/ash -c "packer version"
 
 after_success:
     - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-      docker push patrickdappollonio/alpine-packer;
+      docker push $IMAGE_TAG;
       fi
