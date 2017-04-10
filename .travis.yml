@@ -1,13 +1,14 @@
 sudo: required
 
 services:
-  - docker
+    - docker
 
 script:
-  - docker build --pull=true --rm=true -t patrickdappollonio/alpine-packer .
+    - docker build --pull=true --rm=true -t patrickdappollonio/alpine-packer .
+    - docker run -it patrickdappollonio/alpine-packer /bin/ash -c "packer version"
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push patrickdappollonio/alpine-packer;
-    fi
+    - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+      docker push patrickdappollonio/alpine-packer;
+      fi

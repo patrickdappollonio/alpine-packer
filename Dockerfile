@@ -17,6 +17,3 @@ RUN apk add --no-cache bash
 ADD https://releases.hashicorp.com/packer/${PACKER_VERSION}/${PACKER_ZIPFILE} ${PACKER_DEST}/
 RUN unzip ${PACKER_DEST}/${PACKER_ZIPFILE} -d ${PACKER_DEST} && \
     rm -rf ${PACKER_DEST}/${PACKER_ZIPFILE}
-
-# Test packer and omit the exit code
-RUN packer version
